@@ -9,39 +9,162 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Lock screen -->
-  <main id="lock" class="lock">
-    <div class="lock-card">
-      <div class="lock-icon" aria-hidden="true">🏡</div>
-      <h1>House Guide</h1>
-      <p class="lock-sub">Enter the password we shared with you.</p>
-      <form id="unlock-form" autocomplete="off">
-        <input
-          id="password"
-          type="password"
-          inputmode="text"
-          placeholder="Password"
-          aria-label="Password"
-          autocomplete="current-password"
-          required>
-        <button type="submit" id="unlock-btn">Unlock</button>
-      </form>
-      <p id="error" class="error" role="alert" hidden>Incorrect password — please try again.</p>
-    </div>
-  </main>
-
-  <!-- Guide (revealed after unlock) -->
-  <div id="guide" class="guide" hidden>
+  <div class="guide">
     <header class="guide-header">
       <h1>🏡 House Guide</h1>
-      <button id="lock-again" class="lock-again" type="button">Lock</button>
     </header>
-    <article id="content"></article>
+
+    <article id="content">
+      <section class="intro">
+        <p>Thanks so much for looking after the place. Below is everything you should
+        need. If anything is unclear or goes wrong, message us any time — no question
+        is too small.</p>
+      </section>
+
+      <section id="bins">
+        <h2>🗑️ Bins &amp; rubbish</h2>
+
+        <p>The kitchen has a pull-out drawer with two bins, each lined with a bag:</p>
+        <ul>
+          <li><strong>Front bin = rubbish.</strong> Everything general goes here,
+            including food scraps (we don't separate scraps or compost).</li>
+          <li><strong>Back bin = recycling.</strong></li>
+        </ul>
+
+        <figure>
+          <img src="images/bins.jpg" alt="Pull-out kitchen bin drawer with two bag-lined bins" loading="lazy">
+          <figcaption>The pull-out bin drawer — rubbish at the front, recycling at the back.</figcaption>
+        </figure>
+
+        <p><strong>When a bin is full, take it out to the wheelie bins via the garage
+        back door:</strong></p>
+        <ul>
+          <li><strong>Rubbish:</strong> tie off the bag, drop it in the <strong>red-lid
+            bin</strong> outside, and put a fresh bag in.</li>
+          <li><strong>Recycling:</strong> tip the recycling loose into the
+            <strong>yellow-lid bin</strong> outside, then bring the bag back and reuse
+            it (no need to tie or replace it).</li>
+        </ul>
+
+        <h3>Please don't put down the drains</h3>
+        <ul>
+          <li><strong>Toilet:</strong> only toilet paper — nothing else, please.</li>
+          <li><strong>Sink:</strong> no grease or fat. Let cooking oil/fat from pans
+            cool and scrape it into the rubbish bin instead.</li>
+        </ul>
+
+        <h3>Side door at night</h3>
+        <p>There's an outside light by the garage side door you can leave on if you
+        need to head out there after dark. Take care — the little deck area by that
+        door gets <strong>slippery when it's been raining</strong>.</p>
+      </section>
+
+      <section id="heating">
+        <h2>🔥 Ducted heating (AirTouch)</h2>
+
+        <p>Please use the heating whenever you like. It's controlled from the
+        <strong>iPad on the wall</strong>, on your right as you come into the kitchen.</p>
+
+        <h3>Waking up &amp; unlocking the screen</h3>
+        <ol>
+          <li>Tap the screen to wake it. There's also a physical power button on the
+            <strong>top-right edge</strong> of the iPad if it's fully off.</li>
+          <li>From the clock/date screen, <strong>swipe up</strong> from the bottom.</li>
+          <li>Enter the passcode <strong>(we'll give you this separately)</strong> and
+            tap the blue arrow.</li>
+          <li>The <strong>AirTouch</strong> app should already be open.</li>
+        </ol>
+
+        <figure>
+          <img src="images/heating-unlock.jpg" alt="iPad lock screen showing the number keypad" loading="lazy">
+          <figcaption>Swipe up, enter the code, tap the blue arrow.</figcaption>
+        </figure>
+
+        <h3>Turning heating on</h3>
+        <ol>
+          <li>Press the small <strong>power button next to each room/zone</strong> you
+            want heated (Living, Master, Office, etc.).</li>
+          <li>Then press the <strong>large power button in the top-centre</strong> of
+            the app to turn the system on.</li>
+          <li>Only the zones you switched on will be heated.</li>
+        </ol>
+
+        <figure>
+          <img src="images/heating-zones.jpg" alt="AirTouch app showing room zones and set points" loading="lazy">
+          <figcaption>Each room has its own on/off and temperature. The big power
+          button at the top centre runs the whole system.</figcaption>
+        </figure>
+
+        <h3>Our suggested settings</h3>
+        <ul>
+          <li><strong>Overnight:</strong> set each room you want on to <strong>18°C</strong>
+            and let it gently top up. If you set it to 20–23° overnight it gets far too
+            hot.</li>
+          <li><strong>Daytime (if cold):</strong> 22–23°C heats the house nicely.</li>
+          <li>The <strong>master bedroom and office</strong> side of the house gets
+            little winter sun, so they often need heating.</li>
+          <li>Heating works best with <strong>windows closed</strong> and
+            <strong>bathroom doors closed</strong> (the bathrooms vent through the
+            showers).</li>
+        </ul>
+      </section>
+
+      <section id="dishwasher">
+        <h2>🍽️ Dishwasher</h2>
+
+        <p><strong>Careful loading and unloading:</strong> the benchtop overhangs the
+        open dishwasher drawer, and a dish can catch the edge of the bench. That's how
+        the front has been chipped before — and it's a whole-unit replacement to fix
+        properly — so please go gently.</p>
+
+        <figure>
+          <img src="images/dishwasher.jpg" alt="Dishwasher control panel showing cycle and option buttons" loading="lazy">
+          <figcaption>Use <strong>Fast</strong> mode with <strong>Extra Dry</strong> selected.</figcaption>
+        </figure>
+
+        <p>To run it:</p>
+        <ol>
+          <li>Load it up.</li>
+          <li>Add a dishwasher powder tablet — they're in the <strong>drawer under the
+            sink</strong>.</li>
+          <li>Select <strong>Fast</strong> mode and turn on <strong>Extra Dry</strong>.</li>
+          <li>Press start.</li>
+        </ol>
+      </section>
+
+      <section id="power-cut">
+        <h2>💡 If there's a power cut</h2>
+
+        <p class="callout"><strong>Please let us know if the power goes out.</strong>
+        There are a few things that need resetting once it comes back on, and we have a
+        separate checklist for that we'll walk you through.</p>
+
+        <p>To get by in the meantime:</p>
+        <ul>
+          <li><strong>Torches:</strong> above the main kitchen fridge.</li>
+          <li><strong>Drinking water:</strong> in the back scullery, above the fridge.</li>
+          <li><strong>Candles:</strong> around the house, with a <strong>lighter in the
+            scullery drawer</strong>.</li>
+        </ul>
+      </section>
+
+      <section id="general">
+        <h2>ℹ️ Other handy things</h2>
+        <ul>
+          <li><strong>Water runs on a pump.</strong> When you turn on a tap it takes a
+            moment for the pump to kick in and pressure to build — totally normal.</li>
+          <li><strong>Deliveries:</strong> we may have a few parcels arrive.</li>
+          <li><strong>Visitors:</strong> Nikita's parents might pop by.</li>
+          <li><strong>Cleaning supplies:</strong> in the kitchen <strong>under the
+            sink</strong>, in <strong>each bathroom</strong>, and there are extra
+            cloths/supplies in the garage.</li>
+        </ul>
+      </section>
+    </article>
+
     <footer class="guide-footer">
       <p>Questions? Just message us any time. 💛</p>
     </footer>
   </div>
-
-  <script src="app.js"></script>
 </body>
 </html>

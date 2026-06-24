@@ -1,11 +1,9 @@
 {
   "name": "house-guide",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Static house-sitting guide, password-gated, hosted on GitHub Pages.",
-  "type": "module",
+  "description": "Static house-sitting guide, hosted on GitHub Pages.",
   "scripts": {
-    "build": "node build/encrypt.mjs",
-    "serve": "node --run build && npx --yes serve docs"
+    "serve": "npx --yes serve docs"
   }
 }
