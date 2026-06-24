@@ -12,7 +12,10 @@ const els = {
   lockAgain: document.getElementById('lock-again'),
 };
 
-const SESSION_KEY = 'house-guide-pw';
+// localStorage (not sessionStorage) so a device stays unlocked across visits
+// and browser restarts — users only enter the password once. The "Lock"
+// button clears it.
+const STORE_KEY = 'house-guide-pw';
 
 const fromB64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 
@@ -80,11 +83,11 @@ async function attempt(password, { fromSession = false } = {}) {
   els.button.textContent = 'Unlocking…';
   try {
     const html = await decrypt(password);
-    sessionStorage.setItem(SESSION_KEY, password);
+    localStorage.setItem(STORE_KEY, password);
     reveal(html);
   } catch (err) {
     if (fromSession) {
-      sessionStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(STORE_KEY);
     } else {
       els.error.hidden = false;
       els.password.value = '';
@@ -103,7 +106,7 @@ els.form.addEventListener('submit', (e) => {
 });
 
 els.lockAgain.addEventListener('click', () => {
-  sessionStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(STORE_KEY);
   els.content.innerHTML = '';
   els.guide.hidden = true;
   els.lock.hidden = false;
@@ -111,6 +114,6 @@ els.lockAgain.addEventListener('click', () => {
   els.password.focus();
 });
 
-// Stay unlocked across reloads within the same tab session.
-const saved = sessionStorage.getItem(SESSION_KEY);
+// Stay unlocked on this device across visits and browser restarts.
+const saved = localStorage.getItem(STORE_KEY);
 if (saved) attempt(saved, { fromSession: true });
