@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1f2933">
+  <title>House Guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Lock screen -->
+  <main id="lock" class="lock">
+    <div class="lock-card">
+      <div class="lock-icon" aria-hidden="true">🏡</div>
+      <h1>House Guide</h1>
+      <p class="lock-sub">Enter the password we shared with you.</p>
+      <form id="unlock-form" autocomplete="off">
+        <input
+          id="password"
+          type="password"
+          inputmode="text"
+          placeholder="Password"
+          aria-label="Password"
+          autocomplete="current-password"
+          required>
+        <button type="submit" id="unlock-btn">Unlock</button>
+      </form>
+      <p id="error" class="error" role="alert" hidden>Incorrect password — please try again.</p>
+    </div>
+  </main>
+
+  <!-- Guide (revealed after unlock) -->
+  <div id="guide" class="guide" hidden>
+    <header class="guide-header">
+      <h1>🏡 House Guide</h1>
+      <button id="lock-again" class="lock-again" type="button">Lock</button>
+    </header>
+    <article id="content"></article>
+    <footer class="guide-footer">
+      <p>Questions? Just message us any time. 💛</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

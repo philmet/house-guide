@@ -1,0 +1,213 @@
+:root {
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --ink: #1f2933;
+  --ink-soft: #52606d;
+  --accent: #b5552d;
+  --accent-soft: #f3e3da;
+  --line: #e3ded3;
+  --shadow: 0 2px 12px rgba(31, 41, 51, 0.08);
+  --radius: 14px;
+  --maxw: 680px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Lock screen ---------- */
+.lock {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.lock-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+.lock-icon { font-size: 44px; line-height: 1; }
+
+.lock h1 {
+  margin: 12px 0 4px;
+  font-size: 1.5rem;
+}
+
+.lock-sub {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+#unlock-form { display: grid; gap: 12px; }
+
+input[type="password"] {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fbfaf6;
+  color: var(--ink);
+}
+
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  transition: filter 0.15s ease;
+}
+
+button:hover { filter: brightness(1.05); }
+button:active { filter: brightness(0.95); }
+button:disabled { opacity: 0.6; cursor: default; }
+
+.error {
+  margin: 14px 0 0;
+  color: #9b2226;
+  font-size: 0.9rem;
+}
+
+/* ---------- Guide ---------- */
+.guide {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 18px 64px;
+}
+
+.guide-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  margin-bottom: 8px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-header h1 { margin: 0; font-size: 1.35rem; }
+
+.lock-again {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+#content section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 18px;
+  margin: 0 0 18px;
+}
+
+#content section.intro {
+  background: var(--accent-soft);
+  border-color: #e6cdbf;
+}
+
+#content h2 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-soft);
+}
+
+#content h3 {
+  margin: 20px 0 6px;
+  font-size: 1.02rem;
+  color: var(--accent);
+}
+
+#content p { margin: 0 0 12px; }
+#content ul, #content ol { margin: 0 0 12px; padding-left: 22px; }
+#content li { margin-bottom: 6px; }
+#content li::marker { color: var(--accent); }
+
+.callout {
+  background: #fff6e9;
+  border-left: 4px solid #e0a106;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 0 0 14px !important;
+}
+
+/* ---------- Images ---------- */
+figure {
+  margin: 16px 0;
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #faf8f3;
+}
+
+figcaption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* Placeholder shown when an image file is missing */
+img.img-missing {
+  display: grid;
+  place-items: center;
+  min-height: 140px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 16px;
+}
+
+.guide-footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin-top: 24px;
+}
+
+@media (min-width: 600px) {
+  .guide-header h1 { font-size: 1.5rem; }
+  #content section { padding: 24px; }
+}

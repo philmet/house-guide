@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.log
+.env
+
+# Plaintext guide source — NEVER commit this to a public repo.
+# Only the encrypted docs/content.enc.json is published. Keep a backup
+# of this file somewhere safe (it is not in version control).
+src/content.html
