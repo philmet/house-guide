@@ -22,19 +22,34 @@ const fromB64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 let payloadPromise = null;
 function getPayload() {
   if (!payloadPromise) {
-    payloadPromise = fetch('content.enc.json', { cache: 'no-store' })
+    // Cache-bust the URL so a browser/CDN can never serve a stale encrypted
+    // file after an update (which would make the correct password look wrong).
+    payloadPromise = fetch(`content.enc.json?t=${Date.now()}`, { cache: 'no-store' })
       .then((r) => {
         if (!r.ok) throw new Error('Could not load guide content.');
         return r.json();
+      })
+      .catch((err) => {
+        // Don't cache a failure — allow the next attempt to retry the fetch.
+        payloadPromise = null;
+        throw err;
       });
   }
   return payloadPromise;
 }
 
 async function decrypt(password) {
-  const data = await getPayload();
-  const enc = new TextEncoder();
+  // A load failure must be distinguishable from a wrong password, so the user
+  // isn't told "incorrect password" when really the content didn't download.
+  let data;
+  try {
+    data = await getPayload();
+  } catch (err) {
+    err.code = 'load';
+    throw err;
+  }
 
+  const enc = new TextEncoder();
   const baseKey = await crypto.subtle.importKey(
     'raw', enc.encode(password), 'PBKDF2', false, ['deriveKey'],
   );
@@ -46,14 +61,18 @@ async function decrypt(password) {
     ['decrypt'],
   );
 
-  // Throws if the password is wrong (auth tag mismatch).
-  const plainBuf = await crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv: fromB64(data.iv) },
-    key,
-    fromB64(data.ct),
-  );
-
-  return new TextDecoder().decode(plainBuf);
+  try {
+    const plainBuf = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: fromB64(data.iv) },
+      key,
+      fromB64(data.ct),
+    );
+    return new TextDecoder().decode(plainBuf);
+  } catch (err) {
+    // Auth-tag mismatch = wrong password.
+    err.code = 'badpw';
+    throw err;
+  }
 }
 
 function reveal(html) {
@@ -86,9 +105,19 @@ async function attempt(password, { fromSession = false } = {}) {
     localStorage.setItem(STORE_KEY, password);
     reveal(html);
   } catch (err) {
-    if (fromSession) {
+    if (err.code === 'load') {
+      // Content didn't download — not a password problem. Keep any saved
+      // password and tell the user it's a connection issue.
+      if (!fromSession) {
+        els.error.textContent = 'Couldn’t load the guide. Check your connection and try again.';
+        els.error.hidden = false;
+      }
+    } else if (fromSession) {
+      // A saved password no longer works (e.g. password was changed) — clear it
+      // silently and let the user type the new one.
       localStorage.removeItem(STORE_KEY);
     } else {
+      els.error.textContent = 'Incorrect password — please try again.';
       els.error.hidden = false;
       els.password.value = '';
       els.password.focus();
